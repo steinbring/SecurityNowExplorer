@@ -21,7 +21,10 @@
 
     <preference name="phonegap-version" value="3.1.0" />
     
-    <access origin="*" subdomains="true" />
+    <access origin="https://media.grc.com" subdomains="true" />
+    <access origin="http://twit.cachefly.net" subdomains="true" />
+    <access origin="http://aolradio.podcast.aol.com" subdomains="true" />
+    <access origin="https://www.grc.com" subdomains="true" />
     
     <preference name="permissions" value="none"/>
 
