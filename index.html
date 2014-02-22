@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Security Now Explorer</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="css/jquery.mobile-1.4.0.min.css">
+	<link rel="stylesheet" href="css/main.css">
+	<script src="js/jquery.js"></script>
+	<script src="js/jquery.mobile-1.4.0.min.js"></script>
+	<script>
+		$( document ).one( "pageshow", function() {
+			$( "body > [data-role='header']" ).toolbar();
+		});
+	</script>
+</head>
+<body>
+
+	<div data-role="header" data-position="fixed" data-theme="a">
+		<h1>Security Now Explorer</h1>
+		<a href="#outside" data-icon="bars" data-iconpos="notext">Menu</a>
+	</div><!-- /header -->
+
+	<div data-role="page" id="home">
+
+		<div role="main" class="ui-content">
+			<p>
+				Intro Page
+			</p>
+
+		</div><!-- /content -->
+
+	</div><!-- /page -->
+
+	<div data-role="page" id="episode">
+
+		<div role="main" class="ui-content">
+
+		</div><!-- /content -->
+
+	</div><!-- /page -->
+
+	<div data-role="page" id="acknoledgements">
+
+		<div role="main" class="ui-content">
+
+		<h2>Acknowledgments</h2>
+
+		<p>This application was written by Joe Steinbring, using PhoneGap Build and Kimono.  The source code for this application is available via http://steinbring.net.</p>
+		</div><!-- /content -->
+
+	</div><!-- /page -->
+
+	<div data-role="panel" id="outside" data-theme="b">
+		<!-- The sidebar nav thing -->
+		<ul data-role="listview" id="sidemenu">
+			<li data-icon="back"><a href="#" data-rel="close">Close</a></li>
+			<li><a href="#home">Introduction</a></li>
+			<li><a href="#acknoledgements">Acknowledgments</a>
+			<li style="text-align:center;">Episode List</li>
+		</ul>
+	</div>
+
+	<script type="text/javascript">
+		var EpData;
+		function kimonoCallback(data) {
+			for (var i=0;i<data.results.collection1.length;i++){
+				$("#sidemenu").append('<li><a href="#episode" onclick="loadEpisode('+i+');">'+data.results.collection1[i].Title.text+'</a></li>');
+			}
+			$( "body > [data-role='panel']" ).panel();
+			$( "body > [data-role='panel'] [data-role='listview']" ).listview();
+			EpData = data.results.collection1;
+		}
+		function loadEpisode(i){
+			// Figure out the episode number
+			var colon = EpData[i].Title.text.search(":");
+			var EpNumber  = EpData[i].Title.text.substring(1,colon)
+			if (EpNumber < 10)
+				EpNumber = '0'+EpNumber;
+			if (EpNumber < 100)
+				EpNumber = '0'+EpNumber;
+			// Create the episode page
+			$('#episode .ui-content').empty();
+			$('#episode .ui-content').append('<h1>'+EpData[i].Title.text+'</h1>');
+			$('#episode .ui-content').append('<h2>'+EpData[i].Date+'</h2>');
+			$('#episode .ui-content').append('<p>'+EpData[i].Description+'</p>');
+			$('#episode .ui-content').append('<a href="https://media.grc.com/sn/sn-'+EpNumber+'.mp3" class="ui-btn ui-shadow ui-corner-all ui-btn-a">High quality 64 kbps mp3</a>');
+			$('#episode .ui-content').append('<a href="https://media.grc.com/sn/sn-'+EpNumber+'-lq.mp3" class="ui-btn ui-shadow ui-corner-all ui-btn-a">Lower quality 16 kbps mp3</a>');
+			// Close the panel
+			$( "body > [data-role='panel']" ).panel( "close" );
+		}
+
+		$.ajax({
+		"url":"http://www.kimonolabs.com/api/cqp8cyui?apikey=495a5101a00dfd6ca91e247ccab74968&callback=kimonoCallback",
+		"crossDomain":true,
+		"dataType":"jsonp"
+		});
+	</script>
+</body>
+</html>
