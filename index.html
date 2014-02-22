@@ -25,7 +25,7 @@
 
 		<div role="main" class="ui-content">
 			<p>
-				Intro Page
+				The Security Now Explorer is meant to allow you to explore the Security Now back-catalog.  To check out a particular episode, use the menu on the right.
 			</p>
 
 		</div><!-- /content -->
@@ -86,8 +86,8 @@
 			$('#episode .ui-content').append('<p>'+EpData[i].Description+'</p>');
 			$('#episode .ui-content').append('<a href="https://media.grc.com/sn/sn-'+EpNumber+'.mp3" class="ui-btn ui-shadow ui-corner-all ui-btn-a" target="_system">High quality 64 kbps mp3</a>');
 			$('#episode .ui-content').append('<a href="https://media.grc.com/sn/sn-'+EpNumber+'-lq.mp3" class="ui-btn ui-shadow ui-corner-all ui-btn-a" target="_system">Lower quality 16 kbps mp3</a>');
-			$('#episode .ui-content').append('<a href="https://www.grc.com/sn/sn-'+EpNumber+'-notes.pdf" class="ui-btn ui-shadow ui-corner-all ui-btn-a" target="_system">Show Notes</a>');
-			$('#episode .ui-content').append('<a href="https://www.grc.com/sn/sn-'+EpNumber+'.pdf" class="ui-btn ui-shadow ui-corner-all ui-btn-a" target="_system">Transcript</a>');
+			$('#episode .ui-content').append('<a href="https://docs.google.com/viewer?url=https://www.grc.com/sn/sn-'+EpNumber+'-notes.pdf" class="ui-btn ui-shadow ui-corner-all ui-btn-a" target="_system">Show Notes</a>');
+			$('#episode .ui-content').append('<a href="https://docs.google.com/viewer?url=https://www.grc.com/sn/sn-'+EpNumber+'.pdf" class="ui-btn ui-shadow ui-corner-all ui-btn-a" target="_system">Transcript</a>');
 			// Close the panel
 			$( "body > [data-role='panel']" ).panel( "close" );
 		}
